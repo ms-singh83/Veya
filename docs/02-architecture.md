@@ -29,21 +29,21 @@ flowchart LR
 
 ## 3. Stack
 
-| Layer | Choice | Notes |
-|-------|--------|-------|
-| Mobile | React Native, Expo (managed + dev builds), TypeScript, Expo Router | |
-| UI | NativeWind (Tailwind) + small in-house component set | |
-| Mobile data | TanStack Query (server cache), Zustand (UI state), MMKV/SecureStore | Tokens in SecureStore only |
-| API | Node.js LTS, Express, TypeScript, Zod | |
-| ORM | Prisma | Migrations in `apps/api/prisma/migrations` |
-| DB | Supabase Postgres | RLS enabled as defence-in-depth |
-| Auth | Supabase Auth | API verifies JWT (JWKS) on each request |
-| AI | Claude API via `@anthropic-ai/sdk`, structured outputs + strict tools | Behind `LlmProvider` |
-| Jobs | `pg-boss` (Postgres-backed durable queue) + cron | No extra infra; retries, singleton keys |
-| Push | `expo-server-sdk` | Receipts polled for errors |
-| Validation shared | `packages/shared` Zod schemas used by app and API | Single source of truth for contracts |
-| Observability | Pino logs (redacted), Sentry, `ai_operations` table | |
-| CI | GitHub Actions: lint, typecheck, test, prisma validate | EAS Build for mobile |
+| Layer             | Choice                                                                | Notes                                      |
+| ----------------- | --------------------------------------------------------------------- | ------------------------------------------ |
+| Mobile            | React Native, Expo (managed + dev builds), TypeScript, Expo Router    |                                            |
+| UI                | NativeWind (Tailwind) + small in-house component set                  |                                            |
+| Mobile data       | TanStack Query (server cache), Zustand (UI state), MMKV/SecureStore   | Tokens in SecureStore only                 |
+| API               | Node.js LTS, Express, TypeScript, Zod                                 |                                            |
+| ORM               | Prisma                                                                | Migrations in `apps/api/prisma/migrations` |
+| DB                | Supabase Postgres                                                     | RLS enabled as defence-in-depth            |
+| Auth              | Supabase Auth                                                         | API verifies JWT (JWKS) on each request    |
+| AI                | Claude API via `@anthropic-ai/sdk`, structured outputs + strict tools | Behind `LlmProvider`                       |
+| Jobs              | `pg-boss` (Postgres-backed durable queue) + cron                      | No extra infra; retries, singleton keys    |
+| Push              | `expo-server-sdk`                                                     | Receipts polled for errors                 |
+| Validation shared | `packages/shared` Zod schemas used by app and API                     | Single source of truth for contracts       |
+| Observability     | Pino logs (redacted), Sentry, `ai_operations` table                   |                                            |
+| CI                | GitHub Actions: lint, typecheck, test, prisma validate                | EAS Build for mobile                       |
 
 ## 4. Repository layout (pnpm monorepo)
 
@@ -100,11 +100,11 @@ veya/
 
 ## 8. Environments
 
-| Env | DB | AI key | Push | Purpose |
-|-----|----|--------|------|---------|
-| local | Supabase local (CLI/Docker) or dev project | dev key | Expo Go/dev build | Developer machines |
-| dev/staging | `lifehealth-dev` | dev key, low spend cap | dev builds | Internal QA |
-| prod | `lifehealth-prod` | prod key | store builds | Beta + launch |
+| Env         | DB                                         | AI key                 | Push              | Purpose            |
+| ----------- | ------------------------------------------ | ---------------------- | ----------------- | ------------------ |
+| local       | Supabase local (CLI/Docker) or dev project | dev key                | Expo Go/dev build | Developer machines |
+| dev/staging | `veya-dev`                                 | dev key, low spend cap | dev builds        | Internal QA        |
+| prod        | `veya-prod`                                | prod key               | store builds      | Beta + launch      |
 
 Feature flags (env or DB table): `AI_ENABLED`, `CHAT_ENABLED`, `PUSH_ENABLED`, `NUTRITION_EXTERNAL_API_ENABLED` — allow disabling AI instantly during an incident.
 
