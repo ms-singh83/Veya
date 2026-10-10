@@ -31,8 +31,8 @@ jobs:
         run: pnpm test
       - name: Build API
         run: pnpm --filter @veya/api build
-      - name: Bundle mobile (Android)
+      - name: Bundle mobile (iOS + Android)
         working-directory: apps/mobile
-        run: npx expo export --platform android --output-dir /tmp/expo-export
+        run: npx expo export --platform ios --platform android --output-dir /tmp/expo-export
         env:
           CI: 1
