@@ -405,14 +405,14 @@ Test RLS with two test users using the anon key (pgTAP or a Jest suite) — see 
 
 ## 6. Retention
 
-| Data | Retention | Job |
-|------|-----------|-----|
-| `food_estimates` (unconfirmed) | 24 h | hourly purge |
-| Meal photos (Phase 2) | Deleted after processing unless opted-in | n/a in MVP |
-| `chat_messages` | 180 days default; user can delete sessions anytime | daily purge |
-| `ai_operations` | 90 days | daily purge |
-| `scheduled_notifications` (terminal) | 30 days | daily purge |
-| `idempotency_records` | 48 h | hourly purge |
-| `data_exports` files | 7 days | daily purge |
-| Account deletion | Hard delete all rows within 7 days (soft-flag immediately, block access) | deletion worker |
-| Backups | Provider PITR window; document in privacy policy | — |
+| Data                                 | Retention                                                                | Job             |
+| ------------------------------------ | ------------------------------------------------------------------------ | --------------- |
+| `food_estimates` (unconfirmed)       | 24 h                                                                     | hourly purge    |
+| Meal photos (Phase 2)                | Deleted after processing unless opted-in                                 | n/a in MVP      |
+| `chat_messages`                      | 180 days default; user can delete sessions anytime                       | daily purge     |
+| `ai_operations`                      | 90 days                                                                  | daily purge     |
+| `scheduled_notifications` (terminal) | 30 days                                                                  | daily purge     |
+| `idempotency_records`                | 48 h                                                                     | hourly purge    |
+| `data_exports` files                 | 7 days                                                                   | daily purge     |
+| Account deletion                     | Hard delete all rows within 7 days (soft-flag immediately, block access) | deletion worker |
+| Backups                              | Provider PITR window; document in privacy policy                         | —               |

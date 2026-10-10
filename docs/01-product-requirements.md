@@ -2,16 +2,16 @@
 
 ## 1. Product definition
 
-| Item | Value |
-|------|-------|
-| Name | LifeHealth AI |
-| Tagline | Your personal everyday wellness agent |
-| Platforms | iOS + Android (one Expo codebase) |
-| Audience | Adults 18+ |
-| Type | Consumer wellness — **not** a medical device |
-| Build target | 4–6 weeks to closed beta |
+| Item         | Value                                        |
+| ------------ | -------------------------------------------- |
+| Name         | Veya                                         |
+| Tagline      | Your personal everyday wellness agent        |
+| Platforms    | iOS + Android (one Expo codebase)            |
+| Audience     | Adults 18+                                   |
+| Type         | Consumer wellness — **not** a medical device |
+| Build target | 4–6 weeks to closed beta                     |
 
-**Core promise:** Every day, LifeHealth AI helps you decide what to do for your well-being, makes tracking easy, and helps you stay consistent.
+**Core promise:** Every day, Veya helps you decide what to do for your well-being, makes tracking easy, and helps you stay consistent.
 
 ## 2. Personas
 
@@ -21,19 +21,20 @@
 
 ## 3. MVP success criteria (targets to validate)
 
-| Metric | Target |
-|--------|--------|
-| Time from install to first plan | < 3 minutes (median) |
-| Taps to log water | ≤ 2 from Today |
-| Taps to log a known meal | ≤ 5 |
-| Weekly report numbers match DB | 100% (automated test) |
-| Estimates labelled as estimates | 100% of nutrition values |
-| Week-2 retention of beta users | Measure; no fixed target yet |
-| Unsafe answers in safety eval | 0 critical failures |
+| Metric                          | Target                       |
+| ------------------------------- | ---------------------------- |
+| Time from install to first plan | < 3 minutes (median)         |
+| Taps to log water               | ≤ 2 from Today               |
+| Taps to log a known meal        | ≤ 5                          |
+| Weekly report numbers match DB  | 100% (automated test)        |
+| Estimates labelled as estimates | 100% of nutrition values     |
+| Week-2 retention of beta users  | Measure; no fixed target yet |
+| Unsafe answers in safety eval   | 0 critical failures          |
 
 ## 4. Scope
 
 ### MVP — must ship
+
 - Sign-up / sign-in, onboarding, adult wellness profile
 - AI-generated daily wellness plan with tasks
 - Text-based meal logging with approximate nutrition estimates
@@ -45,9 +46,11 @@
 - Safety checks, error handling, rate limits
 
 ### Phase 2 (after validation)
+
 HealthKit / Health Connect, wearables, meal photos, family/caregiver profiles, medication schedules, calendar reminders, advanced trends, paid subscriptions.
 
 ### Out of scope
+
 Diagnosis, treatment, prescriptions/dosage, emergency monitoring, disease prediction, medical-grade scores, autonomous medical decisions, custom-trained models, multi-agent swarms, users under 18.
 
 ## 5. Navigation
@@ -57,7 +60,9 @@ Bottom tabs: **Today · Food · Activity · Insights · Chat**. Profile/Settings
 ## 6. Screens and acceptance criteria
 
 ### S1 — Welcome & onboarding
+
 Steps (each skippable except those marked *):
+
 1. Sign up / log in* (email + password; optional Google/Apple)
 2. Age confirmation 18+* and time zone* (auto-detected, editable)
 3. Accept terms, privacy, wellness disclaimer* (versioned consent)
@@ -69,12 +74,14 @@ Steps (each skippable except those marked *):
 9. Generating first plan → Today
 
 **Acceptance**
+
 - Skipping every optional step still produces a basic plan (template fallback if AI unavailable).
 - Under-18 → blocked with a polite message; no data stored beyond what's needed to block.
 - Onboarding completion sets `profiles.onboarding_completed_at`.
 - Median completion < 3 min in usability testing.
 
 ### S2 — Today dashboard
+
 - Header: greeting, date, avatar → settings
 - Plan card: summary + task list with checkboxes, category icons, suggested times
 - Metrics row: meals logged, water (ml / goal), sleep last night, activity minutes
@@ -86,6 +93,7 @@ Steps (each skippable except those marked *):
 **Acceptance**: every card navigates to its detail; task completion and quick logs update optimistically and reconcile with server; offline → queued with idempotency key.
 
 ### S3 — Food
+
 - Day selector, list of meals grouped by breakfast/lunch/dinner/snack
 - Add meal: type, time, free-text description **or** search food → choose portion
 - Estimate review sheet: items, quantity, unit, calories/protein/carbs/fat with "≈" and source; items needing clarification are highlighted with a question
@@ -95,6 +103,7 @@ Steps (each skippable except those marked *):
 **Acceptance**: estimates never shown as exact; unknown values show "—" not 0; edits recalculate totals.
 
 ### S4 — Activity & habits
+
 - Water: quick add buttons (150/250/500 ml), custom, list for day
 - Sleep: start/end pickers or duration; supports crossing midnight
 - Activity: type (walk, run, yoga, cycling, gym, sport, other), duration, optional steps/distance
@@ -104,6 +113,7 @@ Steps (each skippable except those marked *):
 **Acceptance**: validation of ranges and future dates; time zone correct; overlapping sleep logs warned.
 
 ### S5 — Reminders (inside Settings, also reachable from Today chip)
+
 - Categories: hydration, meals, activity, sleep wind-down, plan check-in, weekly report
 - Per category: enabled, local times, days of week
 - Quiet hours (default 22:00–07:00)
@@ -113,6 +123,7 @@ Steps (each skippable except those marked *):
 **Acceptance**: disabled categories never fire; retries never duplicate; snooze reschedules exactly one notification.
 
 ### S6 — Insights (weekly)
+
 - Week selector
 - Coverage strip: days with any log
 - Sleep: avg duration on logged days, number of logged nights
@@ -126,6 +137,7 @@ Steps (each skippable except those marked *):
 **Acceptance**: all numbers come from DB aggregates; summary is fact-checked against metrics; regenerate available.
 
 ### S7 — Chat
+
 - Session list + new chat
 - Message stream, typing indicator
 - Persistent banner: "General wellness info, not medical advice"
@@ -135,6 +147,7 @@ Steps (each skippable except those marked *):
 **Acceptance**: no write action without user confirmation; refuses diagnosis/medication changes; works with AI-context permission off (no personal data in prompt).
 
 ### S8 — Profile, settings & privacy
+
 - Edit name, goals, schedule, diet, time zone
 - Reminder settings (S5)
 - Permissions: notifications, AI personal-context use, analytics
@@ -146,15 +159,15 @@ Steps (each skippable except those marked *):
 
 ## 7. Non-functional requirements
 
-| Area | Requirement |
-|------|-------------|
-| Performance | Today screen loads < 1.5 s on 4G (cached first paint < 300 ms). Non-AI API p95 < 300 ms. Plan generation p95 < 20 s with progress UI. |
-| Availability | Logging works if the AI provider is down. |
-| Offline | Water/activity/sleep logging queued offline and synced. |
-| Accessibility | WCAG AA contrast, screen-reader labels, dynamic font sizes. |
-| Localisation | English at launch; strings externalised for Hindi later. Metric units. |
-| Security | See [09-safety-privacy.md](09-safety-privacy.md). |
-| Cost | Per-user daily AI budget (see [04-ai-agent.md](04-ai-agent.md)). |
+| Area          | Requirement                                                                                                                           |
+| ------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
+| Performance   | Today screen loads < 1.5 s on 4G (cached first paint < 300 ms). Non-AI API p95 < 300 ms. Plan generation p95 < 20 s with progress UI. |
+| Availability  | Logging works if the AI provider is down.                                                                                             |
+| Offline       | Water/activity/sleep logging queued offline and synced.                                                                               |
+| Accessibility | WCAG AA contrast, screen-reader labels, dynamic font sizes.                                                                           |
+| Localisation  | English at launch; strings externalised for Hindi later. Metric units.                                                                |
+| Security      | See [09-safety-privacy.md](09-safety-privacy.md).                                                                                     |
+| Cost          | Per-user daily AI budget (see [04-ai-agent.md](04-ai-agent.md)).                                                                      |
 
 ## 8. Analytics events (no health values)
 

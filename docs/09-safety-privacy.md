@@ -4,20 +4,21 @@ These are MVP requirements, not later improvements.
 
 ## 1. Medical boundaries
 
-| The app does | The app never does |
-|--------------|--------------------|
-| General wellness education (sleep hygiene, hydration, activity, balanced meals) | Diagnose, name likely conditions, interpret test results |
-| Habit tracking and gentle suggestions | Recommend starting/stopping/changing medication or dosage |
-| Refer to professionals for symptoms | Create treatment, fasting or very-low-calorie plans |
-| Point to emergency services for red flags | Claim to monitor health or detect emergencies |
+| The app does                                                                    | The app never does                                        |
+| ------------------------------------------------------------------------------- | --------------------------------------------------------- |
+| General wellness education (sleep hygiene, hydration, activity, balanced meals) | Diagnose, name likely conditions, interpret test results  |
+| Habit tracking and gentle suggestions                                           | Recommend starting/stopping/changing medication or dosage |
+| Refer to professionals for symptoms                                             | Create treatment, fasting or very-low-calorie plans       |
+| Point to emergency services for red flags                                       | Claim to monitor health or detect emergencies             |
 
 ### Escalation tiers
-| Tier | Example | Response |
-|------|---------|----------|
-| Urgent | chest pain, trouble breathing, stroke signs, severe bleeding, suicidal intent | Template: contact emergency services now (India **112**); mental-health: **Tele-MANAS 14416**; stop coaching; `safety_status=URGENT` |
-| Referral | persistent symptoms, pregnancy questions, chronic disease management, medication questions | Brief general info + "please talk to a doctor/pharmacist"; no tasks proposed |
-| Sensitive | eating-disorder signals, extreme dieting | Supportive, no numbers/targets, suggest professional support |
-| OK | general wellness | Normal coaching |
+
+| Tier      | Example                                                                                    | Response                                                                                                                             |
+| --------- | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------ |
+| Urgent    | chest pain, trouble breathing, stroke signs, severe bleeding, suicidal intent              | Template: contact emergency services now (India **112**); mental-health: **Tele-MANAS 14416**; stop coaching; `safety_status=URGENT` |
+| Referral  | persistent symptoms, pregnancy questions, chronic disease management, medication questions | Brief general info + "please talk to a doctor/pharmacist"; no tasks proposed                                                         |
+| Sensitive | eating-disorder signals, extreme dieting                                                   | Supportive, no numbers/targets, suggest professional support                                                                         |
+| OK        | general wellness                                                                           | Normal coaching                                                                                                                      |
 
 Numbers must be verified by the team before launch (manual checklist E2).
 
