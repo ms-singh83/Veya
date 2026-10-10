@@ -34,9 +34,50 @@ Requirements: Node 22.12+ and pnpm 10 (`corepack enable`).
 ```bash
 pnpm install
 cp apps/api/.env.example apps/api/.env
-
 pnpm dev:api      # API on http://localhost:4000 (GET /health)
-pnpm dev:mobile   # Expo dev server — scan the QR code with Expo Go, or press w for web
+```
+
+> Run mobile commands with the root `pnpm` scripts below (or from inside `apps/mobile`).
+> Running `npx expo start` at the **repo root** fails with _"Could not resolve react-native"_ /
+> _"iOS is disabled"_, because the root is the workspace, not the Expo app.
+
+### iOS Simulator (Xcode)
+
+One-time setup on your Mac:
+
+1. Install the latest **Xcode** from the App Store, open it once and accept the licence.
+2. Xcode → Settings → Components: install an **iOS Simulator** runtime.
+3. `xcode-select --install` (command line tools) and `brew install cocoapods watchman`.
+
+Then, from the repo root:
+
+```bash
+pnpm ios          # builds the native app with Xcode, installs it on the simulator and starts Metro
+```
+
+To build and run from the Xcode UI instead:
+
+```bash
+pnpm ios:xcode    # generates apps/mobile/ios (+ CocoaPods) and opens it in Xcode
+pnpm start        # keep Metro running in a terminal
+```
+
+In Xcode pick the **Veya** scheme and an iPhone simulator, then press **Run (⌘R)**.
+
+Notes:
+
+- `apps/mobile/ios` is generated (Continuous Native Generation) and git-ignored — never edit it by hand;
+  change `app.json` / config plugins and re-run `pnpm ios:xcode` (add `--clean` to the prebuild to regenerate).
+- If Xcode can't find `node` (common with nvm), create `apps/mobile/ios/.xcode.env.local` containing
+  `export NODE_BINARY=$(which node)` using the path printed by `which node` in your terminal.
+- If port 8081 is busy (another Metro project), stop it or accept the alternate port Expo offers.
+
+### Expo Go / Android / web
+
+```bash
+pnpm start        # dev server (press s to switch between development build and Expo Go)
+pnpm android      # native Android build (Android Studio + emulator required)
+pnpm --filter @veya/mobile web
 ```
 
 Checks (same as CI): `pnpm format:check && pnpm lint && pnpm typecheck && pnpm test`.

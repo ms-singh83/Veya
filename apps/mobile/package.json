@@ -5,9 +5,13 @@
   "main": "expo-router/entry",
   "scripts": {
     "start": "expo start",
-    "android": "expo start --android",
-    "ios": "expo start --ios",
+    "start:go": "expo start --go",
+    "ios": "expo run:ios",
+    "ios:device": "expo run:ios --device",
+    "android": "expo run:android",
     "web": "expo start --web",
+    "prebuild:ios": "expo prebuild --platform ios",
+    "open:xcode": "xed ios",
     "typecheck": "tsc --noEmit",
     "test": "echo \"mobile tests start on Day 5\""
   },
@@ -17,6 +21,7 @@
     "@veya/shared": "workspace:*",
     "expo": "~57.0.27",
     "expo-constants": "~57.0.21",
+    "expo-dev-client": "~57.0.19",
     "expo-linking": "~57.0.12",
     "expo-router": "~57.0.25",
     "expo-splash-screen": "~57.0.9",

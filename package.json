@@ -10,6 +10,10 @@
   "scripts": {
     "dev:api": "pnpm --filter @veya/api dev",
     "dev:mobile": "pnpm --filter @veya/mobile start",
+    "start": "pnpm --filter @veya/mobile start",
+    "ios": "pnpm --filter @veya/mobile ios",
+    "android": "pnpm --filter @veya/mobile android",
+    "ios:xcode": "pnpm --filter @veya/mobile prebuild:ios && pnpm --filter @veya/mobile open:xcode",
     "lint": "eslint .",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
